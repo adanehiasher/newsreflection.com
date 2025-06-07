@@ -160,7 +160,7 @@ img {
 }
 
 #header-logo{
-    width: 120px; /* Adjust logo size */
+    width: 140px; /* Adjust logo size */
     height: auto; /* Maintain aspect ratio */
     margin-right: 15px; /* Space between logo and site title */
 }
@@ -782,3 +782,60 @@ img {
 .post-grid{
     display: grid;
 }
+
+/* --- Article Share Buttons --- */
+
+.article-share-buttons {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #eee; /* Light separator line */
+    text-align: center; /* Center the buttons */
+}
+
+.article-share-buttons h4 {
+    margin-bottom: 15px;
+    color: #e1e1e1;
+}
+
+.article-share-buttons ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex; /* Arrange buttons in a row */
+    flex-wrap: wrap; /* Allow wrapping on small screens */
+    justify-content: center; /* Center items in the row */
+    gap: 10px; /* Space between buttons */
+}
+
+.article-share-buttons li {
+    margin: 0; /* Remove default list item margin */
+}
+
+.share-button {
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff; /* Default text color for buttons */
+    font-weight: bold;
+    font-size: 0.9em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    border: none; /* Remove button border */
+}
+
+/* Specific button colors */
+.share-button.facebook { background-color: #3b5998; }
+.share-button.twitter { background-color: #1DA1F2; } /* X (formerly Twitter) blue */
+.share-button.linkedin { background-color: #0077b5; }
+.share-button.whatsapp { background-color: #25D366; }
+.share-button.email { background-color: #777; }
+.share-button.copy-link { background-color: #555; }
+
+/* Hover effects */
+.share-button.facebook:hover { background-color: #2d4373; }
+.share-button.twitter:hover { background-color: #1a8cd8; }
+.share-button.linkedin:hover { background-color: #005f87; }
+.share-button.whatsapp:hover { background-color: #1DA851; }
+.share-button.email:hover { background-color: #555; }
+.share-button.copy-link:hover { background-color: #333; }

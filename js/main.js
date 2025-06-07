@@ -223,3 +223,45 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const articleUrl = encodeURIComponent(window.location.href); // Current article's URL
+    // You'll need to get the article title. This often comes from a data attribute
+    // on the article container, or from the document's <title> tag.
+    // For example:
+    const articleTitleElement = document.querySelector('h1.article-title'); // Assuming your article title is an H1 with class 'article-title'
+    const articleTitle = encodeURIComponent(articleTitleElement ? articleTitleElement.textContent : document.title); // Fallback to document title
+
+    // Define social media share URLs
+    const shareUrls = {
+        facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
+        twitter: `https://twitter.com/intent/tweet?text=${articleTitle}&url=${articleUrl}`,
+        linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${articleUrl}&title=${articleTitle}`,
+        whatsapp: `https://api.whatsapp.com/send?text=${articleTitle}%20${articleUrl}`,
+        email: `mailto:?subject=${articleTitle}&body=Check%20out%20this%20article:%20${articleTitle}%20-%20${articleUrl}`
+    };
+
+    // Set href for social share links
+    document.querySelectorAll('.article-share-buttons a.share-button').forEach(button => {
+        const platform = button.classList[1]; // e.g., 'facebook', 'twitter'
+        if (shareUrls[platform]) {
+            button.href = shareUrls[platform];
+        }
+    });
+
+    // Handle "Copy Link" button
+    const copyLinkButton = document.querySelector('.share-button.copy-link');
+    if (copyLinkButton) {
+        copyLinkButton.addEventListener('click', function() {
+            navigator.clipboard.writeText(decodeURIComponent(articleUrl))
+                .then(() => {
+                    alert('Article link copied to clipboard!');
+                    // Optionally, change button text temporarily to "Copied!"
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    alert('Could not copy link. Please copy it manually from your browser\'s address bar.');
+                });
+        });
+    }
+});
