@@ -110,7 +110,7 @@ document.addEventListener('DOMContentLoaded', () => {
         mainHeader.classList.add('animate-ready');
     }
 
-    // --- Article Click and Data Storage Logic (unchanged) ---
+    // --- Article Click and Data Storage Logic (MODIFIED) ---
     const postCards = document.querySelectorAll('.post-card');
 
     postCards.forEach(card => {
@@ -126,10 +126,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const postTitleElement = card.querySelector('.post-title-link');
             const fullContentElement = card.querySelector('.full-article-content');
+            // MODIFIED: Get the image element from the post card
+            const postImageElement = card.querySelector('.post-thumbnail'); // Assuming this is the class for the image in post-cards
 
             const articleData = {
                 title: postTitleElement ? postTitleElement.textContent : 'Untitled Article',
-                content: fullContentElement ? fullContentElement.innerHTML : '<p>No content available for this article.</p>'
+                content: fullContentElement ? fullContentElement.innerHTML : '<p>No content available for this article.</p>',
+                // MODIFIED: Add image source and alt text to articleData
+                imageUrl: postImageElement ? postImageElement.src : null,
+                imageAlt: postImageElement ? postImageElement.alt : null
             };
 
             localStorage.setItem('currentArticle', JSON.stringify(articleData));
@@ -148,17 +153,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 const postTitleElement = featuredPostDiv.querySelector('.post-title-link');
                 const heroHeadlineElement = event.target.closest('.hero-content').querySelector('h2');
                 const heroParagraphElement = event.target.closest('.hero-content').querySelector('p:not(.post-meta)');
+                // MODIFIED: Get the featured image element
+                const featuredImageElement = featuredPostDiv.querySelector('.featured-image'); // Assuming this class for featured images
 
                 let simulatedFullContent = '';
+                let featuredImageSrc = null;
+                let featuredImageAlt = null;
+
+                if (featuredImageElement) {
+                    featuredImageSrc = featuredImageElement.src;
+                    featuredImageAlt = featuredImageElement.alt;
+                    // REMOVED: No longer add image directly to simulatedFullContent here.
+                    // post.html will now handle displaying the image separately using articleData.imageUrl
+                }
+
                 if (heroHeadlineElement) {
                     simulatedFullContent += `<h2>${heroHeadlineElement.textContent}</h2>`;
                 }
                 if (heroParagraphElement) {
                     simulatedFullContent += `<p>${heroParagraphElement.textContent}</p>`;
                 }
-                if (featuredPostDiv.querySelector('.featured-image')) {
-                    simulatedFullContent += `<img src="${featuredPostDiv.querySelector('.featured-image').src}" alt="${postTitleElement ? postTitleElement.textContent : ''}" class="post-detail-image">`;
-                }
+                
                 if (featuredPostDiv.querySelector('.post-meta')) {
                     simulatedFullContent += `<p class="post-meta-detail">${featuredPostDiv.querySelector('.post-meta').textContent}</p>`;
                 }
@@ -169,7 +184,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 const articleData = {
                     title: postTitleElement ? postTitleElement.textContent : 'Featured Article',
-                    content: simulatedFullContent
+                    content: simulatedFullContent,
+                    // MODIFIED: Add featured image source and alt text to articleData
+                    imageUrl: featuredImageSrc,
+                    imageAlt: featuredImageAlt
                 };
 
                 localStorage.setItem('currentArticle', JSON.stringify(articleData));
@@ -178,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Newsletter Signup Functionality ---
+    // --- Newsletter Signup Functionality (unchanged) ---
     const newsletterForm = document.getElementById('newsletter-form');
     const emailInput = document.getElementById('email-input');
     const newsletterMessage = document.getElementById('newsletter-message');

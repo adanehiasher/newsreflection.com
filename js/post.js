@@ -1,7 +1,9 @@
 document.addEventListener('DOMContentLoaded', () => {
     const postTitleElement = document.getElementById('post-title');
     const postBodyContentElement = document.getElementById('post-body-content');
-
+    // NEW: Select the image element using its ID
+    const articleImageElement = document.getElementById('article-image'); 
+    
     // Retrieve the stored article data from localStorage
     const storedArticle = localStorage.getItem('currentArticle');
 
@@ -11,6 +13,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set the header
         if (postTitleElement) {
             postTitleElement.textContent = articleData.title || 'No Title Available';
+        }
+
+        // NEW: Display the image
+        if (articleImageElement && articleData.imageUrl) {
+            articleImageElement.src = articleData.imageUrl;
+            articleImageElement.alt = articleData.imageAlt || articleData.title || 'Article Image'; // Fallback alt text
+            articleImageElement.style.display = 'block'; // Ensure the image is visible
+        } else if (articleImageElement) {
+            // If no image URL is available, hide the image element
+            articleImageElement.style.display = 'none';
+            articleImageElement.src = ''; // Clear src to prevent broken image icon
         }
 
         // Set the body content directly using innerHTML
@@ -27,6 +40,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         if (postBodyContentElement) {
             postBodyContentElement.innerHTML = '<p>The article you are looking for could not be loaded. Please return to the <a href="index.html">homepage</a>.</p>';
+        }
+        // NEW: Hide the image element if no article data is found
+        if (articleImageElement) {
+            articleImageElement.style.display = 'none';
         }
     }
 });

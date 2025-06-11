@@ -121,7 +121,7 @@ img {
 }
 
 .main-header .container {
-    height: auto; /* Header container doesn't fill 100% height */
+    height: 15vh; /* Header container doesn't fill 100% height */
     flex-direction: row; /* Align items horizontally */
     justify-content: space-between;
     align-items: center;
