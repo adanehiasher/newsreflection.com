@@ -1,5 +1,14 @@
+// js/main.js
+
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Homepage Slideshow Logic (unchanged) ---
+
+    // Ensure the articles array is available (from articlesData.js)
+    if (typeof articles === 'undefined') {
+        console.error('Error: articles array not found. Make sure articlesData.js is loaded before main.js');
+        return; // Stop execution if data isn't available
+    }
+
+    // --- Homepage Slideshow Logic ---
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
     const prevBtn = document.querySelector('.prev-slide');
@@ -7,7 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const slideshowContainer = document.querySelector('.slideshow-container');
 
     let currentSlide = 0;
-    let slideInterval;
+    let slideInterval; 
 
     function showSlide(index) {
         slides.forEach(slide => slide.classList.remove('active'));
@@ -73,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-    // --- Smooth Scroll Animation (unchanged) ---
+    // --- Smooth Scroll Animation ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
@@ -87,8 +96,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- Section Animation (Scroll-triggered - unchanged) ---
-    const sections = document.querySelectorAll('.hero-section, .latest-posts-section, .newsletter-signup-section, .related-articles-section'); // Added .related-articles-section
+    // --- Section Animation (Scroll-triggered) ---
+    const sections = document.querySelectorAll('.hero-section, .latest-posts-section, .newsletter-signup-section, .related-articles-section'); // Re-added related-articles-section here for animation
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -110,176 +119,157 @@ document.addEventListener('DOMContentLoaded', () => {
         mainHeader.classList.add('animate-ready');
     }
 
-    // --- Article Click and Data Storage Logic (MODIFIED) ---
-    const postCards = document.querySelectorAll('.post-card');
+    // --- Dynamic Post Card Generation on index.html (Main Articles List) ---
+    // *******************************************************************
+    // CORRECTED: Targeting 'posts-container' as per index.html
+    const latestPostsGrid = document.getElementById('posts-container');
+    // *******************************************************************
 
-    postCards.forEach(card => {
-        card.addEventListener('click', (event) => {
-            const clickedLink = event.target.closest('a[href="post.html"]');
-            if (clickedLink) {
-                event.preventDefault();
-            } else if (event.target.tagName === 'A') {
-                return;
-            } else {
-                event.preventDefault();
-            }
+    if (latestPostsGrid) {
+        latestPostsGrid.innerHTML = ''; // Clear any existing content
 
-            const postTitleElement = card.querySelector('.post-title-link');
-            const fullContentElement = card.querySelector('.full-article-content');
-            // MODIFIED: Get the image element from the post card
-            const postImageElement = card.querySelector('.post-thumbnail'); // Assuming this is the class for the image in post-cards
-
-            const articleData = {
-                title: postTitleElement ? postTitleElement.textContent : 'Untitled Article',
-                content: fullContentElement ? fullContentElement.innerHTML : '<p>No content available for this article.</p>',
-                // MODIFIED: Add image source and alt text to articleData
-                imageUrl: postImageElement ? postImageElement.src : null,
-                imageAlt: postImageElement ? postImageElement.alt : null
-            };
-
-            localStorage.setItem('currentArticle', JSON.stringify(articleData));
-            window.location.href = 'post.html';
+        // Sort articles by date (most recent first)
+        const sortedArticles = [...articles].sort((a, b) => {
+            // Robust date parsing (if meta format can vary, make this more complex)
+            const dateA = new Date(a.meta.split('|')[1].trim()); 
+            const dateB = new Date(b.meta.split('|')[1].trim());
+            return dateB - dateA; // Sort descending (latest first)
         });
-    });
 
+        sortedArticles.forEach(article => {
+            const postCard = document.createElement('article');
+            postCard.classList.add('post-card'); 
+
+            postCard.innerHTML = `
+                <img src="${article.thumbnail}" alt="Post Thumbnail for ${article.title}" class="post-thumbnail">
+                <div class="post-card-content">
+                    <h3><a href="post.html?slug=${article.slug}" class="post-title-link" data-slug="${article.slug}">${article.title}</a></h3>
+                    <p class="post-meta">${article.meta}</p>
+                    <p class="post-excerpt">${article.excerpt}</p>
+                </div>
+            `;
+            latestPostsGrid.appendChild(postCard);
+
+            // Add event listener to each article link to store its data before navigating
+            const links = postCard.querySelectorAll('.post-title-link, .button.primary');
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); 
+                    const slug = event.target.dataset.slug;
+                    const selectedArticle = articles.find(a => a.slug === slug);
+                    if (selectedArticle) {
+                        localStorage.setItem('currentArticle', JSON.stringify(selectedArticle));
+                        window.location.href = `post.html?slug=${slug}`;
+                    }
+                });
+            });
+        });
+    } else {
+        console.warn('Element with id "posts-container" (for latest posts) not found. Cannot populate all articles.');
+    }
+
+    // --- Dynamic Post Card Generation on index.html (Related Articles List) ---
+    // This section assumes you want a subset or different logic for related posts.
+    // If you just want the same articles as 'latest', you could append to both grids in the same loop above.
+    const relatedPostsGrid = document.getElementById('related-posts-container');
+
+    if (relatedPostsGrid) {
+        relatedPostsGrid.innerHTML = ''; // Clear any existing content
+
+        // Example: Get a subset of articles for related posts (e.g., first 3, or random)
+        // For demonstration, let's just use the first 3 sorted articles.
+        const relatedArticles = sortedArticles.slice(0, 3); // Adjust this logic as needed for 'related'
+
+        relatedArticles.forEach(article => {
+            const postCard = document.createElement('article');
+            postCard.classList.add('post-card'); 
+
+            postCard.innerHTML = `
+                <img src="${article.thumbnail}" alt="Post Thumbnail for ${article.title}" class="post-thumbnail">
+                <div class="post-card-content">
+                    <h3><a href="post.html?slug=${article.slug}" class="post-title-link" data-slug="${article.slug}">${article.title}</a></h3>
+                    <p class="post-meta">${article.meta}</p>
+                    <p class="post-excerpt">${article.excerpt}</p>
+                </div>
+            `;
+            relatedPostsGrid.appendChild(postCard);
+
+            // Add event listener to each article link to store its data before navigating
+            const links = postCard.querySelectorAll('.post-title-link, .button.primary');
+            links.forEach(link => {
+                link.addEventListener('click', (event) => {
+                    event.preventDefault(); 
+                    const slug = event.target.dataset.slug;
+                    const selectedArticle = articles.find(a => a.slug === slug);
+                    if (selectedArticle) {
+                        localStorage.setItem('currentArticle', JSON.stringify(selectedArticle));
+                        window.location.href = `post.html?slug=${slug}`;
+                    }
+                });
+            });
+        });
+    } else {
+        console.warn('Element with id "related-posts-container" not found. Cannot populate related articles.');
+    }
+
+    // --- Featured Post Click Logic ---
     const featuredPostLinks = document.querySelectorAll('.hero-section .featured-post .post-title-link, .hero-section .featured-post .button.primary');
     
     featuredPostLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
 
-            const featuredPostDiv = event.target.closest('.featured-post');
-            if (featuredPostDiv) {
-                const postTitleElement = featuredPostDiv.querySelector('.post-title-link');
-                const heroHeadlineElement = event.target.closest('.hero-content').querySelector('h2');
-                const heroParagraphElement = event.target.closest('.hero-content').querySelector('p:not(.post-meta)');
-                // MODIFIED: Get the featured image element
-                const featuredImageElement = featuredPostDiv.querySelector('.featured-image'); // Assuming this class for featured images
+            // IMPORTANT: The slug should come from the data-slug attribute on the clicked link itself.
+            // This makes the featured section dynamic without hardcoding slugs here.
+            const featuredArticleSlug = event.target.dataset.slug; // Get slug from data-slug attribute
+            const selectedArticle = articles.find(article => article.slug === featuredArticleSlug);
 
-                let simulatedFullContent = '';
-                let featuredImageSrc = null;
-                let featuredImageAlt = null;
-
-                if (featuredImageElement) {
-                    featuredImageSrc = featuredImageElement.src;
-                    featuredImageAlt = featuredImageElement.alt;
-                    // REMOVED: No longer add image directly to simulatedFullContent here.
-                    // post.html will now handle displaying the image separately using articleData.imageUrl
-                }
-
-                if (heroHeadlineElement) {
-                    simulatedFullContent += `<h2>${heroHeadlineElement.textContent}</h2>`;
-                }
-                if (heroParagraphElement) {
-                    simulatedFullContent += `<p>${heroParagraphElement.textContent}</p>`;
-                }
-                
-                if (featuredPostDiv.querySelector('.post-meta')) {
-                    simulatedFullContent += `<p class="post-meta-detail">${featuredPostDiv.querySelector('.post-meta').textContent}</p>`;
-                }
-                if (featuredPostDiv.querySelector('.post-excerpt')) {
-                    simulatedFullContent += `<p>${featuredPostDiv.querySelector('.post-excerpt').textContent}</p>`;
-                }
-                simulatedFullContent += `<p>This is a featured article. In a real application, clicking 'Read More' here would load the full, detailed content from a database or a dedicated article file.</p>`;
-
-                const articleData = {
-                    title: postTitleElement ? postTitleElement.textContent : 'Featured Article',
-                    content: simulatedFullContent,
-                    // MODIFIED: Add featured image source and alt text to articleData
-                    imageUrl: featuredImageSrc,
-                    imageAlt: featuredImageAlt
-                };
-
-                localStorage.setItem('currentArticle', JSON.stringify(articleData));
-                window.location.href = 'post.html';
+            if (selectedArticle) {
+                localStorage.setItem('currentArticle', JSON.stringify(selectedArticle));
+                window.location.href = `post.html?slug=${selectedArticle.slug}`;
+            } else {
+                console.error('Error: Featured article not found for slug:', featuredArticleSlug);
+                window.location.href = 'index.html'; // Fallback
             }
         });
     });
 
-    // --- Newsletter Signup Functionality (unchanged) ---
+
+    // --- Newsletter Signup Functionality ---
     const newsletterForm = document.getElementById('newsletter-form');
     const emailInput = document.getElementById('email-input');
     const newsletterMessage = document.getElementById('newsletter-message');
 
     if (newsletterForm) {
         newsletterForm.addEventListener('submit', (e) => {
-            e.preventDefault(); // Prevent the form from submitting normally and refreshing the page
+            e.preventDefault(); 
 
-            const email = emailInput.value.trim(); // Get the email and remove whitespace
+            const email = emailInput.value.trim(); 
 
             if (email) {
-                // Get existing subscriptions or initialize an empty array
                 let subscriptions = JSON.parse(localStorage.getItem('newsletterEmails')) || [];
 
-                // Check if email already exists
                 if (subscriptions.includes(email)) {
                     newsletterMessage.textContent = 'You are already subscribed!';
-                    newsletterMessage.style.color = '#ffc107'; // Optional: A warning color
+                    newsletterMessage.style.color = '#ffc107'; 
                 } else {
-                    // Add the new email
                     subscriptions.push(email);
-                    // Save the updated array to localStorage
                     localStorage.setItem('newsletterEmails', JSON.stringify(subscriptions));
 
-                    // Display success message
                     newsletterMessage.textContent = 'Subscribed!';
-                    newsletterMessage.style.color = '#28a745'; // Optional: A success color
+                    newsletterMessage.style.color = '#28a745'; 
 
-                    // Clear the input field
                     emailInput.value = '';
                 }
             } else {
                 newsletterMessage.textContent = 'Please enter a valid email address.';
-                newsletterMessage.style.color = '#dc3545'; // Optional: An error color
+                newsletterMessage.style.color = '#dc3545'; 
             }
 
-            // Optional: Hide message after a few seconds
             setTimeout(() => {
                 newsletterMessage.textContent = '';
-                newsletterMessage.style.color = ''; // Reset color
-            }, 5000); // Clear message after 5 seconds
-        });
-    }
-});
-
-document.addEventListener('DOMContentLoaded', function() {
-    const articleUrl = encodeURIComponent(window.location.href); // Current article's URL
-    // You'll need to get the article title. This often comes from a data attribute
-    // on the article container, or from the document's <title> tag.
-    // For example:
-    const articleTitleElement = document.querySelector('h1.article-title'); // Assuming your article title is an H1 with class 'article-title'
-    const articleTitle = encodeURIComponent(articleTitleElement ? articleTitleElement.textContent : document.title); // Fallback to document title
-
-    // Define social media share URLs
-    const shareUrls = {
-        facebook: `https://www.facebook.com/sharer/sharer.php?u=${articleUrl}`,
-        twitter: `https://twitter.com/intent/tweet?text=${articleTitle}&url=${articleUrl}`,
-        linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${articleUrl}&title=${articleTitle}`,
-        whatsapp: `https://api.whatsapp.com/send?text=${articleTitle}%20${articleUrl}`,
-        email: `mailto:?subject=${articleTitle}&body=Check%20out%20this%20article:%20${articleTitle}%20-%20${articleUrl}`
-    };
-
-    // Set href for social share links
-    document.querySelectorAll('.article-share-buttons a.share-button').forEach(button => {
-        const platform = button.classList[1]; // e.g., 'facebook', 'twitter'
-        if (shareUrls[platform]) {
-            button.href = shareUrls[platform];
-        }
-    });
-
-    // Handle "Copy Link" button
-    const copyLinkButton = document.querySelector('.share-button.copy-link');
-    if (copyLinkButton) {
-        copyLinkButton.addEventListener('click', function() {
-            navigator.clipboard.writeText(decodeURIComponent(articleUrl))
-                .then(() => {
-                    alert('Article link copied to clipboard!');
-                    // Optionally, change button text temporarily to "Copied!"
-                })
-                .catch(err => {
-                    console.error('Failed to copy text: ', err);
-                    alert('Could not copy link. Please copy it manually from your browser\'s address bar.');
-                });
+                newsletterMessage.style.color = ''; 
+            }, 3000);
         });
     }
 });
