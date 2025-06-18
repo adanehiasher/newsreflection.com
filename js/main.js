@@ -101,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.2
+        threshold: 0
     };
     const sectionObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach(entry => {

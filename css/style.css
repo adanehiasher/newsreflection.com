@@ -684,6 +684,7 @@ img {
 /* --- Responsive Adjustments --- */
 @media (max-width: 768px) {
     .main-header .container {
+        height: 20%;
         flex-direction: column;
         gap: 15px;
     }
