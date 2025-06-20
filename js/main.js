@@ -8,6 +8,68 @@ document.addEventListener('DOMContentLoaded', () => {
         return; // Stop execution if data isn't available
     }
 
+    // --- Configuration for Open Graph Tags ---
+    // !!! IMPORTANT: Replace 'YOUR_BLOG_BASE_URL_HERE' with your actual blog's base URL !!!
+    const YOUR_BLOG_BASE_URL = 'https://newsreflection.com'; // e.g., 'https://myawesomeblog.com'
+    const DEFAULT_OG_IMAGE = 'img/newsreflection.png'; // Path to a default image for your blog
+    const SITE_NAME = 'News Reflection'; // Your blog's name
+
+
+    // --- Helper function to update/create meta tags ---
+    function updateMetaTag(property, content, isProperty = true) {
+        let selector = isProperty ? `meta[property="${property}"]` : `meta[name="${property}"]`;
+        let tag = document.querySelector(selector);
+
+        if (!tag) {
+            tag = document.createElement('meta');
+            if (isProperty) {
+                tag.setAttribute('property', property);
+            } else {
+                tag.setAttribute('name', property);
+            }
+            document.head.appendChild(tag);
+        }
+        tag.setAttribute('content', content);
+    }
+
+    // --- Function to update Open Graph meta tags for an article ---
+    function setArticleOpenGraphTags(article) {
+        const absoluteArticleUrl = `${YOUR_BLOG_BASE_URL}/post.html?slug=${article.slug}`;
+        const absoluteThumbnailUrl = article.thumbnail.startsWith('http') ? article.thumbnail : `${YOUR_BLOG_BASE_URL}${article.thumbnail}`;
+
+        updateMetaTag('og:title', article.title);
+        updateMetaTag('og:description', article.excerpt);
+        updateMetaTag('og:image', absoluteThumbnailUrl || DEFAULT_OG_IMAGE);
+        updateMetaTag('og:url', absoluteArticleUrl);
+        updateMetaTag('og:type', 'article');
+        updateMetaTag('og:site_name', SITE_NAME);
+
+        // Also update the standard <title> tag
+        document.title = `${article.title} - ${SITE_NAME}`;
+
+        // Optional: Twitter Card tags (often fall back to OG if not present)
+        updateMetaTag('twitter:card', 'summary_large_image', false); // name attribute
+        updateMetaTag('twitter:title', article.title, false);
+        updateMetaTag('twitter:description', article.excerpt, false);
+        updateMetaTag('twitter:image', absoluteThumbnailUrl || DEFAULT_OG_IMAGE, false);
+        // If you have a Twitter handle for your blog:
+        // updateMetaTag('twitter:creator', '@YourTwitterHandle', false);
+    }
+
+    // --- Function to reset Open Graph meta tags for non-article pages (e.g., index.html) ---
+    function resetDefaultOpenGraphTags() {
+        // You can set default values for your homepage or other general pages
+        updateMetaTag('og:title', SITE_NAME);
+        updateMetaTag('og:description', 'Your blog\'s default description or tagline.');
+        updateMetaTag('og:image', DEFAULT_OG_IMAGE);
+        updateMetaTag('og:url', YOUR_BLOG_BASE_URL);
+        updateMetaTag('og:type', 'website');
+        updateMetaTag('og:site_name', SITE_NAME);
+
+        document.title = SITE_NAME; // Reset default title
+    }
+
+
     // --- Homepage Slideshow Logic ---
     const slides = document.querySelectorAll('.slide');
     const dots = document.querySelectorAll('.dot');
@@ -120,10 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // --- Dynamic Post Card Generation on index.html (Main Articles List) ---
-    // *******************************************************************
-    // CORRECTED: Targeting 'posts-container' as per index.html
     const latestPostsGrid = document.getElementById('posts-container');
-    // *******************************************************************
 
     if (latestPostsGrid) {
         latestPostsGrid.innerHTML = ''; // Clear any existing content
@@ -151,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             latestPostsGrid.appendChild(postCard);
 
             // Add event listener to each article link to store its data before navigating
-            const links = postCard.querySelectorAll('.post-title-link, .button.primary');
+            const links = postCard.querySelectorAll('.post-title-link'); // Removed .button.primary as it's not in the innerHTML for latestPostsGrid
             links.forEach(link => {
                 link.addEventListener('click', (event) => {
                     event.preventDefault(); 
@@ -164,20 +223,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             });
         });
+        // On index.html, set default OG tags
+        resetDefaultOpenGraphTags();
+
     } else {
         console.warn('Element with id "posts-container" (for latest posts) not found. Cannot populate all articles.');
     }
 
     // --- Dynamic Post Card Generation on index.html (Related Articles List) ---
-    // This section assumes you want a subset or different logic for related posts.
-    // If you just want the same articles as 'latest', you could append to both grids in the same loop above.
     const relatedPostsGrid = document.getElementById('related-posts-container');
 
     if (relatedPostsGrid) {
         relatedPostsGrid.innerHTML = ''; // Clear any existing content
 
+        const sortedArticles = [...articles].sort((a, b) => {
+            const dateA = new Date(a.meta.split('|')[1].trim()); 
+            const dateB = new Date(b.meta.split('|')[1].trim());
+            return dateB - dateA;
+        });
+
         // Example: Get a subset of articles for related posts (e.g., first 3, or random)
-        // For demonstration, let's just use the first 3 sorted articles.
         const relatedArticles = sortedArticles.slice(0, 3); // Adjust this logic as needed for 'related'
 
         relatedArticles.forEach(article => {
@@ -195,7 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
             relatedPostsGrid.appendChild(postCard);
 
             // Add event listener to each article link to store its data before navigating
-            const links = postCard.querySelectorAll('.post-title-link, .button.primary');
+            const links = postCard.querySelectorAll('.post-title-link'); // Removed .button.primary
             links.forEach(link => {
                 link.addEventListener('click', (event) => {
                     event.preventDefault(); 
@@ -219,9 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
 
-            // IMPORTANT: The slug should come from the data-slug attribute on the clicked link itself.
-            // This makes the featured section dynamic without hardcoding slugs here.
-            const featuredArticleSlug = event.target.dataset.slug; // Get slug from data-slug attribute
+            const featuredArticleSlug = event.target.dataset.slug;
             const selectedArticle = articles.find(article => article.slug === featuredArticleSlug);
 
             if (selectedArticle) {
@@ -271,5 +334,52 @@ document.addEventListener('DOMContentLoaded', () => {
                 newsletterMessage.style.color = ''; 
             }, 3000);
         });
+    }
+
+    // --- Article Detail Page Logic (post.html) ---
+    // This section runs ONLY when post.html is loaded directly or navigated to.
+    const articleDetailTitle = document.getElementById('article-detail-title');
+    const articleDetailContent = document.getElementById('article-detail-content');
+    const articleDetailThumbnail = document.getElementById('article-detail-thumbnail');
+    const articleDetailMeta = document.getElementById('article-detail-meta'); // Assuming you have this element
+
+    if (articleDetailTitle && articleDetailContent) {
+        // Try to get article data from localStorage first
+        let currentArticle = JSON.parse(localStorage.getItem('currentArticle'));
+
+        // If not in localStorage, try to get slug from URL and find it in the global articles array
+        if (!currentArticle) {
+            const urlParams = new URLSearchParams(window.location.search);
+            const slugFromUrl = urlParams.get('slug');
+            if (slugFromUrl) {
+                currentArticle = articles.find(a => a.slug === slugFromUrl);
+            }
+        }
+
+        if (currentArticle) {
+            articleDetailTitle.textContent = currentArticle.title;
+            articleDetailContent.innerHTML = currentArticle.content; // Use innerHTML for rich content
+            if (articleDetailThumbnail) {
+                articleDetailThumbnail.src = currentArticle.thumbnail;
+                articleDetailThumbnail.alt = `Thumbnail for ${currentArticle.title}`;
+            }
+            if (articleDetailMeta) {
+                articleDetailMeta.textContent = currentArticle.meta;
+            }
+
+            // --- IMPORTANT: Update OG tags for the specific article ---
+            setArticleOpenGraphTags(currentArticle);
+
+        } else {
+            articleDetailTitle.textContent = 'Article Not Found';
+            articleDetailContent.innerHTML = '<p>The article you are looking for does not exist or could not be loaded.</p>';
+            console.error('No article found to display on post.html');
+            // Optionally redirect to homepage or set a generic 404 OG tag
+            resetDefaultOpenGraphTags(); // Set default if article not found
+        }
+    } else if (!window.location.pathname.includes('post.html')) {
+        // If not on post.html, it's likely index.html or another page.
+        // Ensure default OG tags are set for general pages.
+        resetDefaultOpenGraphTags();
     }
 });
