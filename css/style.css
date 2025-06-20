@@ -378,7 +378,7 @@ img {
 /* --- Latest Posts Section --- */
 .latest-posts-section {
     min-height: 100vh; /* Make section fill viewport height */
-    padding: 60px 0; /* Add back vertical padding for internal content */
+    padding: 20px 0; /* Add back vertical padding for internal content */
     background-color: var(--bg-primary); /* Black background for this section */
     /* Ensure container can still center its content */
     /* Animation base state for scroll-triggered sections */
