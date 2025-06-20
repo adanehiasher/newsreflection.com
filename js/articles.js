@@ -275,4 +275,108 @@ const articles = [
         `   
 
     },
+    {
+        slug: "felicitation-nawojo-kaduna-rotary-club-collaborates",
+        title: "NAWOJ Kaduna, Rotary Club collaborates towards service to Humanity.",
+        thumbnail: "img/nawoj.jpg",
+        meta: "By Admin | June 17, 2025",
+        excerpt: "Corporate Social Responsibility has been described as the veritable tool towards assisting individuals and the government in the society.",
+        images: [
+            { src: "img/nawoj.jpg", alt: "comrade" },
+        ],
+        content: `
+            <p> Corporate Social Responsibility has been described as the veritable tool towards assisting individuals and the government in the society.
+            </p>
+            <p>
+                These forms part of the conclusion of some members of Rotary Club Kaduna Metropolitan, at its monthly and partnership meeting with Nigeria Association of Women Journalists, NAWOJ Kaduna State Chapter, held at Hadala hotel in Kaduna.
+            </p>
+            <p>
+                Speaking during the meeting, President of Rotary Club Kaduna Metropolitan, Rotarian Isiaka Anthony maintained that government alone cannot do everything for the people, hence the need for wealth individuals, organizations and clubs to indulge in projects that would help the less privileged in the society.
+            </p>
+            <p>
+                According to him, Rotary Club of Kaduna Metropolitan has achieved numerous Charity projects cut across the State, noting that as a charity and humanitarian Club it would continue to do more.
+            </p>
+            <p>
+                "We have had course to visit some public schools in the state and donate uniforms, exercise books, chairs, desks and other writing materials, some of the schools visited are in a pitiable state", he said.
+                Rotarian Isiaka Anthony while welcoming the NAWOJ Acting Chairperson, Comrade Sahura Jibrin Maidoki maintained that he is optimistic that the collaboration with the Women Journalists would go a long way in the publicity of the activities of the Club for better understanding and possible collaboration with the public, saying government alone cannot do everything, hence the need to support them.
+                On his part, the Assistant Zonal Coordinator of the Club, Rotarian Victor Majekodunmi who took out time to explain the history and the four principles of Rotary Club, which include: is it the truth, Is it fair to all concerned, both government and citizens,  Will it build good will and better friendship- with out cheating and Will it be beneficial to all concerned, noted that the four components should be adhered to by all in the society, in order to carry every one along.
+                Rotarian Victor applauded the initiative of the Club in the areas of helping the less privileged in the society, pointing out that the Club has assisted and would continue to assist the less privileged in the State and called on spirited individuals to key into the vision of the Club for a better society for all.
+            </p>
+            <p>
+                Commenting, the President- elect of the Club, Rotarian Lukeman Babatunde explained that there are lined up of activities for the Club this year, saying that the Rotary Action Group for Peace, Nigeria Chapter, Kaduna State branch has aligned it's intervention in accordance with the theme of Rotary International designates for the month of July which is Maternal and Child month.
+                " we are at present in conjunction with our State Director of Programmes planning to donate 50 (for now) ante-natal birth kits to a Primary Health Centre in Mando Kaduna to commemorate the month", he said.
+            </p>
+            <p>
+                 Rotarian Luke Babatunde who intimate the Club that the collaboration with NAWOJ was born out, giving the fact that the role media play in the society can not be over emphasized, prayed that they would achieve more together.
+                 Earlier, the Acting Chairperson of NAWOJ, Comrade Sahura Jibrin Maidoki said that NAWOJ Kaduna are in collaboration with some organizations in the state and the collaboration with Rotary Kaduna Metropolitan is a welcome development as it would help to disseminate all the activities of the Club through the right channels.
+            </p>
+            <p>
+               She said that NAWOJ doors are open to all individuals, organizations and clubs who are ready to give back to the society, through its humanitarian aids and charity, adding that government alone cannot do everything, hence the need for all to support them to put an end to poverty in the society.
+            </p>
+        `   
+
+    },
+    {
+        slug: "kaduna-president-tinubu-commissions-landmark-projects",
+        title: "Kaduna: President Tinubu Commissions Landmark Projects.",
+        thumbnail: "img/tinubuinkaduna.jpg",
+        meta: "By Admin | June 19, 2025",
+        excerpt: "President Bola Ahmed Tinubu is on a one-day working visit to Kaduna State, where he commissioned a series of landmark projects in the State.",
+        images: [
+            { src: "img/tinubuinkaduna.jpg", alt: "comrade" }
+        ],
+        content: `
+            <p> President Bola Ahmed Tinubu is on a one-day working visit to Kaduna State, where he commissioned a series of landmark projects in the State.
+            </p>
+            <p>
+                Upon his arrival at the Nigerian Air Force Base in Kaduna, the President was received by Governor Uba Sani, alongside senior government officials, traditional leaders, and other dignitaries.
+            </p>
+            <p>
+                President Tinubu’s visit focused on project inauguration in Rigachikun, Igabi Local Government Area, where he commissioned newly constructed road networks, upgraded healthcare centres, and modern educational facilities. 
+            </p>
+            <p>
+                The projects aimed at strengthening infrastructure and improving social services and broader developmental strategy to drive rural transformation and expand access to critical public service.
+            </p>
+            <p>
+                Speaking during the inauguration, President Tinubu applauded the Kaduna State Government for its commitment to the people particularly those at the grassroots and urged continued collaboration across all tiers of government to deliver tangible progress to Nigerians.
+            </p>
+        `   
+
+    },
+    {
+        slug: "ngo-lauds-arts-creativity-in-the-education-of-youths",
+        title: "NGO lauds Arts, Creativity in the Education of Youths.",
+        thumbnail: "img/ngo lauds.jpg",
+        meta: "By Admin | June 19, 2025",
+        excerpt: "An NGO known as Search for Common Ground has identified Arts and Creativity as the best way to educate, communicate and enlighten people particularly the youths.",
+        images: [
+            { src: "img/ngo lauds.jpg", alt: "comrade" },
+            { src: "img/ngolauds1.jpg", alt: "comrade" }
+        ],
+        content: `
+            <p> An NGO known as Search for Common Ground has identified Arts and Creativity as the best way to educate, communicate and enlighten people particularly the youths.
+                Head of Programme Implementation of the Organization, Mr Godwin Okoku  made this known at the screening of a film " Bridging the Abyss" premier for tertaitary institutions students in Kaduna.
+            <p>
+                He explained that film like Bridging the Abyss, is featured-length and the initiative was to strengthen structures that safeguard citizens’ right to freedom of religion.
+            </p>
+            <p>
+                Mr. Okoku maintained that the project Promoting and Protecting Freedom of Religion or Belief, PP-FoRB had successfully addressed over 33 reported cases of violations across the country.
+            </p>
+            <p>
+                He noted that the NGO work closely with traditional institutions, religious leaders, and civil society organizations to resolve conflicts and promote dialogue.
+                On her part, Senior Media Officer for the project, Katlong Dasat said the Organisations uses storytelling and film to promote human rights and religious inclusion among young people.
+            </p>
+            <p>
+                She maintained that Art is a powerful advocacy tool and through films like Bridging the Abyss, young people can understand their right to believe, or not to believe, without fear or discrimination.
+                “Freedom of religion or belief is guaranteed by our constitution. It is a right, not a privilege", she said.
+            </p>
+            <p>
+                Dasat noted that the aim of the project is to foster understanding of human rights and social justice principles and to help the students to know when and where to report such cases.
+                In an interview with some of the students, Mr Isaac Ibuka, Miss Miracle Elefe, Mr. Kingsley Ikechukwu explained that they have learned to be tolerant and practice their religion without fear as well as to speak up when their rights and beliefs are violated.
+                The event featured a panel session and questions and answers session.
+                The feature-length film  "Bridging the Abyss" explores the critical need to bridge the religious divide in Nigeria, highlighting the high stakes for marginalized communities in their fight for freedom of religion or belief.
+            </p>
+        `   
+
+    },
 ];
