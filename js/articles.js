@@ -379,4 +379,34 @@ const articles = [
         `   
 
     },
+    {
+        slug: "senate-july-constitution-review-public-hearing",
+        title: "Senate: July 4, 5 set for Constitution Review Public Hearing in 6 Geopolitical Zones.",
+        thumbnail: "img/senate.jpg",
+        meta: "By Admin | June 23, 2025",
+        excerpt: "The Senate Committee on the Review of the 1999 Constitution is set to organise a comprehensive 2-day Zonal Public Hearing in the country's six geo-political zones to gather Nigerians' input on the proposed constitutional amendments.",
+        images: [
+            { src: "img/senate.jpg", alt: "comrade" }
+        ],
+        content: `
+            <p> The Senate Committee on the Review of the 1999 Constitution is set to organise a comprehensive 2-day Zonal Public Hearing in the country's six geo-political zones to gather Nigerians' input on the proposed constitutional amendments.
+            <p>
+                The committee, chaired by the Deputy  President of the Senate, Senator Barau Jibrin, said the public hearing which will be held simultaneously in Lagos (South West), Enugu (South East), Ikot Ekpene (South South, Jos (North Central) Maiduguri, (North East) and Kano (North West).
+            </p>
+            <p>
+                The hearing, scheduled for July 4th and 5th, 2025, will examine critical national issues, including local government autonomy, electoral and judicial reforms, state creation, state police and inclusive governance.
+            </p>
+            <p>
+               The Special Adviser to the Deputy President of the Senate on Media and Publicity, Ismail Mudashir, said one of the bills, proposes the establishment of Local Government Councils as a tier of government to guarantee their democratic existence and tenure. 
+            </p>
+            <p>
+                This is part of a renewed push to grant full autonomy to the country's 774 Local Government Councils.
+
+ The second bill on local government reforms seeks to create an independent National Local Government Electoral Commission (NALGEC) to organise, conduct and supervise local government elections.
+
+Also to be considered during the zonal public hearing are two bills on security and policing for the establishment of state police and state security council to coordinate internal security policies at the sub-national level, among others.
+            </p>
+        `   
+
+    },
 ];

@@ -8,67 +8,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return; // Stop execution if data isn't available
     }
 
-    // --- Configuration for Open Graph Tags ---
-    // !!! IMPORTANT: Replace 'YOUR_BLOG_BASE_URL_HERE' with your actual blog's base URL !!!
-    const YOUR_BLOG_BASE_URL = 'https://newsreflection.com'; // e.g., 'https://myawesomeblog.com'
-    const DEFAULT_OG_IMAGE = 'img/newsreflection.png'; // Path to a default image for your blog
-    const SITE_NAME = 'News Reflection'; // Your blog's name
-
-
-    // --- Helper function to update/create meta tags ---
-    function updateMetaTag(property, content, isProperty = true) {
-        let selector = isProperty ? `meta[property="${property}"]` : `meta[name="${property}"]`;
-        let tag = document.querySelector(selector);
-
-        if (!tag) {
-            tag = document.createElement('meta');
-            if (isProperty) {
-                tag.setAttribute('property', property);
-            } else {
-                tag.setAttribute('name', property);
-            }
-            document.head.appendChild(tag);
-        }
-        tag.setAttribute('content', content);
-    }
-
-    // --- Function to update Open Graph meta tags for an article ---
-    function setArticleOpenGraphTags(article) {
-        const absoluteArticleUrl = `${YOUR_BLOG_BASE_URL}/post.html?slug=${article.slug}`;
-        const absoluteThumbnailUrl = article.thumbnail.startsWith('http') ? article.thumbnail : `${YOUR_BLOG_BASE_URL}${article.thumbnail}`;
-
-        updateMetaTag('og:title', article.title);
-        updateMetaTag('og:description', article.excerpt);
-        updateMetaTag('og:image', absoluteThumbnailUrl || DEFAULT_OG_IMAGE);
-        updateMetaTag('og:url', absoluteArticleUrl);
-        updateMetaTag('og:type', 'article');
-        updateMetaTag('og:site_name', SITE_NAME);
-
-        // Also update the standard <title> tag
-        document.title = `${article.title} - ${SITE_NAME}`;
-
-        // Optional: Twitter Card tags (often fall back to OG if not present)
-        updateMetaTag('twitter:card', 'summary_large_image', false); // name attribute
-        updateMetaTag('twitter:title', article.title, false);
-        updateMetaTag('twitter:description', article.excerpt, false);
-        updateMetaTag('twitter:image', absoluteThumbnailUrl || DEFAULT_OG_IMAGE, false);
-        // If you have a Twitter handle for your blog:
-        // updateMetaTag('twitter:creator', '@YourTwitterHandle', false);
-    }
-
-    // --- Function to reset Open Graph meta tags for non-article pages (e.g., index.html) ---
-    function resetDefaultOpenGraphTags() {
-        // You can set default values for your homepage or other general pages
-        updateMetaTag('og:title', SITE_NAME);
-        updateMetaTag('og:description', 'Your blog\'s default description or tagline.');
-        updateMetaTag('og:image', DEFAULT_OG_IMAGE);
-        updateMetaTag('og:url', YOUR_BLOG_BASE_URL);
-        updateMetaTag('og:type', 'website');
-        updateMetaTag('og:site_name', SITE_NAME);
-
-        document.title = SITE_NAME; // Reset default title
-    }
-
 
     // --- Homepage Slideshow Logic ---
     const slides = document.querySelectorAll('.slide');
