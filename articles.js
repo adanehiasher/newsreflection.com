@@ -441,7 +441,8 @@ const articles = [
         meta: "By Admin | June 24, 2025",
         excerpt: "The National Directorate of Employment, NDE has set out July next month to launch the second phase of the Renewed Hope Empowerment Initiative.",
         images: [
-            { src: "img/newguys.jpg", alt: "comrade" }
+            { src: "img/newguys.jpg", alt: "comrade" },
+            { src: "img/newguys2.jpg", alt: "comrade" }
         ],
         content: `
             <p> The National Directorate of Employment, NDE has set out July next month to launch the second phase of the Renewed Hope Empowerment Initiative.
