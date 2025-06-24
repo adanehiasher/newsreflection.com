@@ -402,9 +402,34 @@ const articles = [
             <p>
                 This is part of a renewed push to grant full autonomy to the country's 774 Local Government Councils.
 
- The second bill on local government reforms seeks to create an independent National Local Government Electoral Commission (NALGEC) to organise, conduct and supervise local government elections.
+                The second bill on local government reforms seeks to create an independent National Local Government Electoral Commission (NALGEC) to organise, conduct and supervise local government elections.
 
-Also to be considered during the zonal public hearing are two bills on security and policing for the establishment of state police and state security council to coordinate internal security policies at the sub-national level, among others.
+                Also to be considered during the zonal public hearing are two bills on security and policing for the establishment of state police and state security council to coordinate internal security policies at the sub-national level, among others.
+            </p>
+        `   
+
+    },
+    {
+        slug: "kano-rescue-teenager-billboard-dramatic-standoff",
+        title: "Kano: Rescue Operation, as Teenager Climbs Billboard Causing Dramatic Standoff",
+        thumbnail: "img/rescue.jpg",
+        meta: "By Admin | June 23, 2025",
+        excerpt: "A dramatic scene unfolded in Kano when a teenager about seventeen years old climbed a tall billboard along Gadar Lado bridge, refusing to come down until the State Governor, Abba Kabir Yusuf arrived at the scene.",
+        images: [
+            { src: "img/rescue.jpg", alt: "comrade" }
+        ],
+        content: `
+            <p> A dramatic scene unfolded in Kano when a teenager about seventeen years old climbed a tall billboard along Gadar Lado bridge, refusing to come down until the State Governor, Abba Kabir Yusuf arrived at the scene. 
+            </p>
+            <p>
+                The move sparked a massive rescue operation, involving federal and state fire service teams, as well as other security agencies.
+            </p>
+            <p>
+                After a tense standoff, the combined rescue team successfully brought the teenager down from the billboard. 
+            </p>
+            <p>
+               The teenager who was unconscious, was  immediately taken to the hospital for necessary medical attention.
+                Report says, the motivation behind the teenager's actions is still unclear.
             </p>
         `   
 
