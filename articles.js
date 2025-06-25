@@ -463,7 +463,7 @@ const articles = [
 
     },
      {
-        slug: "renewed-hope-nde-launches-second-phase-empowerment-initiative",
+        slug: "tradegy-northern-can-justice-killings-travellers",
         title: "Tragedy: Northern CAN Condemn, Call for Justice Over Killings of 18 Travellers in Plateau.",
         thumbnail: "img/newguys.jpg",
         meta: "By Admin | June 25, 2025",
