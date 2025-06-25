@@ -446,7 +446,7 @@ const articles = [
         ],
         content: `
             <p> The National Directorate of Employment, NDE has set out July next month to launch the second phase of the Renewed Hope Empowerment Initiative.
-            
+            </p>
             <p>
                 Director General of the NDE, Mr. Silas Ali Agara stated this while speaking with newsmen in lafia.
                 He said the initiative which is a build up from the first phase launch last year, would explore opportunities to integrate many of the youths into the NDE programs.
@@ -462,14 +462,14 @@ const articles = [
         `   
 
     },
-     {
+    {
         slug: "tradegy-northern-can-justice-killings-travellers",
         title: "Tragedy: Northern CAN Condemn, Call for Justice Over Killings of 18 Travellers in Plateau.",
-        thumbnail: "img/newguys.jpg",
+        thumbnail: "img/northernCAN.jpg",
         meta: "By Admin | June 25, 2025",
         excerpt: "The Christian Association of Nigeria, CAN in the 19 Northern States and the Federal Capital Territory, FCT have condemned and called for Justice over the recent killing of 12 travellers in Mangun, Mangu Local Government Area of Plateau state.",
         images: [
-            { src: "img/northernCANjpg", alt: "comrade" },
+            { src: "img/northernCAN.jpg", alt: "comrade" },
         ],
         content: `
             <p> The Christian Association of Nigeria, CAN in the 19 Northern States and the Federal Capital Territory, FCT have condemned and called for Justice over the recent killing of 12 travellers in Mangun, Mangu Local Government Area of Plateau state.
