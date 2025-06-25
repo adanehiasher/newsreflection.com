@@ -462,4 +462,42 @@ const articles = [
         `   
 
     },
+    {
+        slug: "tradegy-northern-can-justice-killings-travellers",
+        title: "Tragedy: Northern CAN Condemn, Call for Justice Over Killings of 18 Travellers in Plateau.",
+        thumbnail: "img/northernCAN.jpg",
+        meta: "By Admin | June 25, 2025",
+        excerpt: "The Christian Association of Nigeria, CAN in the 19 Northern States and the Federal Capital Territory, FCT have condemned and called for Justice over the recent killing of 12 travellers in Mangun, Mangu Local Government Area of Plateau state.",
+        images: [
+            { src: "img/northernCAN.jpg", alt: "comrade" },
+        ],
+        content: `
+            <p> The Christian Association of Nigeria, CAN in the 19 Northern States and the Federal Capital Territory, FCT have condemned and called for Justice over the recent killing of 12 travellers in Mangun, Mangu Local Government Area of Plateau state.
+
+            
+            <p>
+                This is contained in a statement issued by Sunday Oibe, Secretary General of Northern CAN in Kaduna.
+
+                He described the killings as  barbaric.“Northern CAN is deeply saddened and outraged by the  dastardly act," he said.
+            </p>
+            <p>
+                According to statement, on Friday, 12 travellers from Zaria, Kaduna state, travelling in a bus  for a wedding in Qu’anpan, Plateau state were killed  in an attack by a mob in  Mangun community. Several others were injured in the attack said to have occurred around 8 pm.
+
+                “We unequivocally condemn this heinous and senseless act of violence. This barbaric and inhuman action reflects the worst of human nature and must not be tolerated under any circumstances". "There can be no justification whatsoever for such a beastly and ungodly act.”
+
+            </p>
+            <p>
+               “Nigeria is sliding dangerously towards an abyss, and the silence and inaction of leadership at various levels only embolden those who seek to plunge this country into chaos and bloodshed".
+
+                “We call on the government—both at the federal and state levels and all security agencies to act swiftly and decisively".
+“The perpetrators of this gruesome crime and indeed many similar killings, especially, by bandits in parts of the country, must be identified, arrested, and made to face the full wrath of the law".
+“The continuous erosion of accountability in our justice system has emboldened lawlessness, and this must be urgently addressed to stop people from resorting to self-help."
+"To the bereaved families, we extend our deepest condolences. We mourn with you and pray that the God of all comfort will strengthen you in this time of unspeakable grief".
+"For those injured and receiving treatment, we wish you a swift and complete recovery."
+"Finally, we appeal to all Nigerians, regardless of religious or ethnic, differences to uphold the sanctity of life and not allow hatred, suspicion, or vengeance to destroy our collective humanity".
+"We must resist every attempt to divide us and instead work together toward building a just, safe, and peaceful nation for all,”  the Statement quoted.
+            </p>
+        `   
+
+    },
 ];
