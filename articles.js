@@ -446,7 +446,35 @@ const articles = [
         ],
         content: `
             <p> The National Directorate of Employment, NDE has set out July next month to launch the second phase of the Renewed Hope Empowerment Initiative.
+            
+            <p>
+                Director General of the NDE, Mr. Silas Ali Agara stated this while speaking with newsmen in lafia.
+                He said the initiative which is a build up from the first phase launch last year, would explore opportunities to integrate many of the youths into the NDE programs.
             </p>
+            <p>
+                Mr. Silas Agara who explained that the first phase of the program was successful across broad and it's success stories and implementation have continued to boost the Agency profile, assured that all participants in the NDE program would continue to feel a sense of belonging.
+                The Director General of the NDE also re-assured Nigerians, stating, that by july the directorate will flag off the second phase of the Renewed Hope Empowerment Initiative.
+            </p>
+            <p>
+               "I want to assure Nigerians that the challenges we encountered during the first phase will be addressed adding that, this time around, we have partnership with various agencies, including the Development Bank of Nigeria and international firms, last week, I engaged with a firm ready to bring us an electronic vehicle,”he said.
+                Mr. Silas Agara urged the staff of the Directorate to prioritize their loyalty to the NDE's mission rather than individual affiliations.
+            </p>
+        `   
+
+    },
+     {
+        slug: "renewed-hope-nde-launches-second-phase-empowerment-initiative",
+        title: "Renewed Hope: NDE launches Second Phase of Empowerment Initiative in July.",
+        thumbnail: "img/newguys.jpg",
+        meta: "By Admin | June 24, 2025",
+        excerpt: "The National Directorate of Employment, NDE has set out July next month to launch the second phase of the Renewed Hope Empowerment Initiative.",
+        images: [
+            { src: "img/newguys.jpg", alt: "comrade" },
+            { src: "img/newguys2.jpg", alt: "comrade" }
+        ],
+        content: `
+            <p> The National Directorate of Employment, NDE has set out July next month to launch the second phase of the Renewed Hope Empowerment Initiative.
+            
             <p>
                 Director General of the NDE, Mr. Silas Ali Agara stated this while speaking with newsmen in lafia.
                 He said the initiative which is a build up from the first phase launch last year, would explore opportunities to integrate many of the youths into the NDE programs.
